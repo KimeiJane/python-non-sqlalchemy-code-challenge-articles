@@ -19,7 +19,7 @@ class Article:
     @title.setter
     def title(self, value):
         if hasattr(self, '_title'):
-            raise AttributeError("Title cannot be changed after initialization")
+            return  # Silently ignore attempts to change title
         if not isinstance(value, str):
             raise TypeError("Title must be a string")
         if not (5 <= len(value) <= 50):
@@ -61,7 +61,7 @@ class Author:
     @name.setter
     def name(self, value):
         if hasattr(self, '_name'):
-            raise AttributeError("Name cannot be changed after initialization")
+            return  # Silently ignore attempts to change name
         if not isinstance(value, str):
             raise TypeError("Name must be a string")
         if len(value) == 0:
@@ -100,9 +100,9 @@ class Magazine:
     @name.setter
     def name(self, value):
         if not isinstance(value, str):
-            raise TypeError("Name must be a string")
+            return  # Silently ignore invalid types
         if not (2 <= len(value) <= 16):
-            raise ValueError("Name must be between 2 and 16 characters")
+            return  # Silently ignore invalid lengths
         self._name = value
 
     @property
@@ -112,9 +112,9 @@ class Magazine:
     @category.setter
     def category(self, value):
         if not isinstance(value, str):
-            raise TypeError("Category must be a string")
+            return  # Silently ignore invalid types
         if len(value) == 0:
-            raise ValueError("Category must be longer than 0 characters")
+            return  # Silently ignore empty strings
         self._category = value
 
     def articles(self):
